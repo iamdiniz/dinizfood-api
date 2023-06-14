@@ -17,12 +17,13 @@ public class ConsultaRestauranteMain {
 				.web(WebApplicationType.NONE)
 				.run(args);
 		
-		RestauranteRepository restaurantes = applicationContext.getBean(RestauranteRepository.class);
+		RestauranteRepository restaurantesRepository = applicationContext.getBean(RestauranteRepository.class);
 		
-		List<Restaurante> todosRestaurantes = restaurantes.todas();
+		List<Restaurante> todosRestaurantes = restaurantesRepository.listar();
 		
 		for(Restaurante restaurante : todosRestaurantes) {
-			System.out.println(restaurante.getNome());
+			System.out.printf("%s - %f - %s\n", restaurante.getNome(),
+					restaurante.getTaxaFrete(), restaurante.getCozinha().getNome());
 		}
 		
 	}

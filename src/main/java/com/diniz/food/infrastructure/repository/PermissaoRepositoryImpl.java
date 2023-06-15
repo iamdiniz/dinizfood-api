@@ -24,7 +24,7 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
 	}
 	
 	@Override
-	public Permissao porId(Long id) {
+	public Permissao buscar(Long id) {
 		return manager.find(Permissao.class, id);
 	}
 	
@@ -37,7 +37,7 @@ public class PermissaoRepositoryImpl implements PermissaoRepository {
 	@Transactional
 	@Override
 	public void remover(Permissao permissao) {
-		permissao = porId(permissao.getId());
+		permissao = buscar(permissao.getId());
 		manager.remove(permissao);
 	}
 

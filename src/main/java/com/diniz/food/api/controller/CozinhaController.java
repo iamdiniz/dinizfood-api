@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.diniz.food.api.model.CozinhasXmlWrapper;
 import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.repository.CozinhaRepository;
+import com.diniz.food.domain.service.CadastroCozinhaService;
 
 @RestController
 @RequestMapping(value = "/cozinhas")
@@ -28,6 +29,9 @@ public class CozinhaController {
 
 	@Autowired
 	private CozinhaRepository cozinhaRepository;
+	
+	@Autowired
+	private CadastroCozinhaService cadastroCozinhaService;
 
 	@GetMapping
 	public List<Cozinha> listar() {
@@ -53,7 +57,7 @@ public class CozinhaController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return cozinhaRepository.salvar(cozinha);
+		return cadastroCozinhaService.salvar(cozinha);
 	}
 	
 	@PutMapping("/{cozinhaId}")

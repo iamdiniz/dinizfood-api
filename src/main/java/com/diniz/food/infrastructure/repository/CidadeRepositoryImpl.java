@@ -2,6 +2,7 @@ package com.diniz.food.infrastructure.repository;
 
 import java.util.List;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +38,12 @@ public class CidadeRepositoryImpl implements CidadeRepository {
 	@Transactional
 	@Override
 	public void remover(Long id) {
-//		cidade = buscar(cidade.getId());
-		Cidade cidade = manager.find(Cidade.class, id);
+		Cidade cidade = buscar(id);
+
+		if (cidade == null) {
+			throw new EmptyResultDataAccessException(1);
+		}
+
 		manager.remove(cidade);
 	}
 

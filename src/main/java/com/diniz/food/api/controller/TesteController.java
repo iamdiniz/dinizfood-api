@@ -13,6 +13,8 @@ import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.model.Restaurante;
 import com.diniz.food.domain.repository.CozinhaRepository;
 import com.diniz.food.domain.repository.RestauranteRepository;
+import com.diniz.food.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.diniz.food.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 
 @RestController
 @RequestMapping("/teste")
@@ -70,6 +72,14 @@ public class TesteController {
 	@GetMapping("/restaurantes/count-por-cozinha")
 	public int restaurantesCountPorCozinha(Long cozinhaId) {
 		return restauranteRepository.countByCozinhaId(cozinhaId);
+	}
+	
+	@GetMapping("/restaurantes/com-frete-gratis")
+	public List<Restaurante> restaurantesComFreteGratis(String nome) {
+		var comFreteGratis = new RestauranteComFreteGratisSpec();
+		var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+		
+		return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
 	}
 	
 }

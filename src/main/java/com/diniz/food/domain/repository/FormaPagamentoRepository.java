@@ -1,14 +1,11 @@
 package com.diniz.food.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.diniz.food.domain.model.FormaPagamento;
 
-public interface FormaPagamentoRepository {
+@Repository
+public interface FormaPagamentoRepository extends JpaRepository<FormaPagamento, Long> {
 
-	List<FormaPagamento> listar();
-	FormaPagamento buscar(Long id);
-	FormaPagamento adicionar(FormaPagamento formaPagamento);
-	void remover(FormaPagamento formaPagamento);
-	
 }

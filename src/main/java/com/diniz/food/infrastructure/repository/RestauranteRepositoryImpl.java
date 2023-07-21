@@ -19,10 +19,7 @@ import com.diniz.food.domain.repository.RestauranteRepositoryQueries;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
 
 @Repository
 public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
@@ -36,10 +33,10 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 	@Override
 	public List<Restaurante> find(String nome,
 			BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal) {
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		var builder = manager.getCriteriaBuilder();
 		
-		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
-		Root<Restaurante> root = criteria.from(Restaurante.class);
+		var criteria = builder.createQuery(Restaurante.class);
+		var root = criteria.from(Restaurante.class);
 		
 		var predicates = new ArrayList<Predicate>();
 		

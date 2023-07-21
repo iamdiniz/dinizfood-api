@@ -1,7 +1,5 @@
 package com.diniz.food.domain.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,15 +23,13 @@ public class CadastroCidadeService {
 	
 	public Cidade salvar(Cidade cidade) {
 		Long estadoId = cidade.getEstado().getId();
-		Optional<Estado> estado = estadoRepository.findById(estadoId);
-		
-		if (estado.isEmpty()) {
-			throw new EntidadeNaoEncontradaException(
-					String.format("Não existe cadastro de estado com código %d", estadoId));
-		}
-		
-		cidade.setEstado(estado.get());
-		
+
+		Estado estado = estadoRepository.findById(estadoId)
+			.orElseThrow(() -> new EntidadeNaoEncontradaException(
+					String.format("Não existe cadastro de estado com código %d", estadoId)));
+
+		cidade.setEstado(estado);
+
 		return cidadeRepository.save(cidade);
 	}
 	

@@ -1,14 +1,11 @@
 package com.diniz.food.domain.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.diniz.food.domain.model.Permissao;
 
-public interface PermissaoRepository {
+@Repository
+public interface PermissaoRepository extends JpaRepository<Permissao, Long> {
 
-	List<Permissao> listar();
-	Permissao buscar(Long id);
-	Permissao adicionar(Permissao permissao);
-	void remover(Permissao permissao);
-	
 }

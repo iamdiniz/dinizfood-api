@@ -52,7 +52,7 @@ public class EstadoController {
 
 		BeanUtils.copyProperties(estado, estadoAtual, "id");
 
-		return estadoAtual = cadastroEstado.salvar(estadoAtual);
+		return cadastroEstado.salvar(estadoAtual);
 	}
 
 	@DeleteMapping("/{estadoId}")

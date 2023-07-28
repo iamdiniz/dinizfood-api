@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.diniz.food.domain.exception.EntidadeNaoEncontradaException;
+import com.diniz.food.domain.exception.EstadoNaoEncontradoException;
 import com.diniz.food.domain.exception.NegocioException;
 import com.diniz.food.domain.model.Cidade;
 import com.diniz.food.domain.repository.CidadeRepository;
@@ -46,7 +46,7 @@ public class CidadeController {
 	public Cidade adicionar(@RequestBody Cidade cidade) {
 		try {
 			return cidade = cadastroCidade.salvar(cidade);
-		} catch (EntidadeNaoEncontradaException e) {
+		} catch (EstadoNaoEncontradoException e) {
 			throw new NegocioException(e.getMessage());
 		}
 	}
@@ -54,14 +54,14 @@ public class CidadeController {
 	@PutMapping("/{cidadeId}")
 	public Cidade atualizar(@PathVariable Long cidadeId,
 			@RequestBody Cidade cidade) {
-		Cidade cidadeAtual = cadastroCidade.buscarOuFalhar(cidadeId);
-				
-		BeanUtils.copyProperties(cidade, cidadeAtual, "id");
-					
 		try {
+			Cidade cidadeAtual = cadastroCidade.buscarOuFalhar(cidadeId);
+					
+			BeanUtils.copyProperties(cidade, cidadeAtual, "id");
+			// Agora com a granularidade fina, eu posso colocar tudo dentro do Try
 			return cadastroCidade.salvar(cidadeAtual);
-		} catch (EntidadeNaoEncontradaException e) {
-			throw new NegocioException(e.getMessage());
+		} catch (EstadoNaoEncontradoException e) { 
+			throw new NegocioException(e.getMessage(), e);
 		}
 	}
 	

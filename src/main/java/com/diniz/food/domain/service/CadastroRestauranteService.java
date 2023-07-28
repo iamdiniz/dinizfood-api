@@ -3,16 +3,13 @@ package com.diniz.food.domain.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.diniz.food.domain.exception.EntidadeNaoEncontradaException;
+import com.diniz.food.domain.exception.RestauranteNaoEncontradoException;
 import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.model.Restaurante;
 import com.diniz.food.domain.repository.RestauranteRepository;
 
 @Service
 public class CadastroRestauranteService {
-
-	private static final String MSG_RESTAURANTE_NAO_ENCONTRADO 
-		= "Não existe um cadastro de restaurante com código %d";
 	
 	@Autowired
 	private RestauranteRepository restauranteRepository;
@@ -30,10 +27,9 @@ public class CadastroRestauranteService {
 		return restauranteRepository.save(restaurante);
 	}
 	
-	public Restaurante buscarOuFalhar(Long cozinhaId) {
-		return restauranteRepository.findById(cozinhaId)
-				.orElseThrow(() -> new EntidadeNaoEncontradaException(
-						String.format(MSG_RESTAURANTE_NAO_ENCONTRADO, cozinhaId)));
+	public Restaurante buscarOuFalhar(Long restauranteId) {
+		return restauranteRepository.findById(restauranteId)
+				.orElseThrow(() -> new RestauranteNaoEncontradoException(restauranteId));
 	}
 	
 }

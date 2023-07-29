@@ -25,13 +25,9 @@
 
  - Exemplo da aplicação em uso
 
-   - Retornando um 409 Conflict ao tentar excluir uma entidade em uso
-  
-     ![Screenshot (63)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/21d57240-de3d-45b7-9dfd-3021f44301bd)
+   - Retornando um 404 not found com resposta personalizada
 
-   - Retornando um 400 Bad Request ao tentar atualizar um restaurante onde a cozinha não existe
-  
-     ![Screenshot (64)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/3d5e05d7-0ed9-4630-a629-6c4c7074cdfe)
+    ![Screenshot (67)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/c3c409a3-f047-473c-b0af-ddeae61251dc)
 
 
  OBS:

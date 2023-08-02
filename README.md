@@ -25,12 +25,16 @@
 
  - Exemplo da aplicação em uso
 
-   - Retornando um 404 not found com resposta personalizada
+   - Retornando um 404 not found com RFC 7807
 
-    ![Screenshot (67)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/c3c409a3-f047-473c-b0af-ddeae61251dc)
+    ![Screenshot (80)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/c137a8c0-5005-49b9-82ce-10be8bc01264)
 
+  - 409 conflit
 
+    ![Screenshot (79)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/c75d2297-dd71-4860-9088-09f7bc56f6e3)
+   
  OBS:
+ - Todos os recursos estão fazendo o uso correto dos código de status http e dos verbos, se tiver algum em falta é porque ainda está em desenvolvimento
 
  - Você não vai conseguir remover cozinhas que tem vinculo com restaurante (DataIntegrityViolationException)
    

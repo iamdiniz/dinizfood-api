@@ -31,8 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		if (rootCause instanceof InvalidFormatException) {
 			return handleInvalidFormatException((InvalidFormatException)rootCause, headers, status, request);
-		}
-		else if (rootCause instanceof PropertyBindingException) {
+		} else if (rootCause instanceof PropertyBindingException) {
 			return handlePropertyBindingException((PropertyBindingException) rootCause, headers, status, request); 
 		}
 

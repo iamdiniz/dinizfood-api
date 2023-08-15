@@ -19,6 +19,8 @@ import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.repository.CozinhaRepository;
 import com.diniz.food.domain.service.CadastroCozinhaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/cozinhas")
 public class CozinhaController {
@@ -41,7 +43,7 @@ public class CozinhaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
+	public Cozinha adicionar(@RequestBody @Valid Cozinha cozinha) {
 		return cadastroCozinha.salvar(cozinha);
 	}
 	

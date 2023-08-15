@@ -3,7 +3,7 @@ package com.diniz.food.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.diniz.food.Groups;
+import com.diniz.food.core.validation.Groups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;

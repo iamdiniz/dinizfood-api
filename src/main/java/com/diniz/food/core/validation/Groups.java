@@ -1,4 +1,4 @@
-package com.diniz.food;
+package com.diniz.food.core.validation;
 
 public interface Groups {
 	

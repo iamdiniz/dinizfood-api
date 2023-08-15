@@ -1,6 +1,6 @@
 package com.diniz.food.domain.model;
 
-import com.diniz.food.Groups;
+import com.diniz.food.core.validation.Groups;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

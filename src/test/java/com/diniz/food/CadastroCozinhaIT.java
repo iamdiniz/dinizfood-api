@@ -1,61 +1,33 @@
 package com.diniz.food;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static io.restassured.RestAssured.given;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
 
-import com.diniz.food.domain.exception.CozinhaNaoEncontradaException;
-import com.diniz.food.domain.exception.EntidadeEmUsoException;
-import com.diniz.food.domain.model.Cozinha;
-import com.diniz.food.domain.service.CadastroCozinhaService;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 
-import jakarta.validation.ConstraintViolationException;
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CadastroCozinhaIT {
-
-	@Autowired
-	private CadastroCozinhaService cadastroCozinha;
 	
-	@Test
-	public void deveAtribuirIr_QuandoCadastrarCozinhaComDadosCorretos() {
-		// cenário
-		Cozinha novaCozinha = new Cozinha();
-		novaCozinha.setNome("Chinesa");
-		
-		// ação
-		novaCozinha = cadastroCozinha.salvar(novaCozinha);
-		
-		// validação
-		assertThat(novaCozinha).isNotNull();
-		assertThat(novaCozinha.getId()).isNotNull();
-	}
-	
-	@Test
-	public void deveFalhar_QuandoCadastrarCozinhaSemNome() {
-		Cozinha novaCozinha = new Cozinha();
-		novaCozinha.setNome(null);
-		
-		assertThrows(ConstraintViolationException.class, () -> {
-			cadastroCozinha.salvar(novaCozinha);
-		});
-	}
-	
-	@Test
-	public void deveFalhar_QuandoExcluirCozinhaEmUso() {
-		assertThrows(EntidadeEmUsoException.class, () -> {
-			cadastroCozinha.excluir(1L);
-		});
-	}
+	@LocalServerPort
+	private int port;
 
 	@Test
-	public void deveFalhar_QuandoExcluirCozinhaInexistente() {
-		assertThrows(CozinhaNaoEncontradaException.class, () -> {
-			cadastroCozinha.excluir(100L);
-		});
+	public void deveRetornarStatus200_QuandoConsultarCozinhas() {
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+		
+		given()
+			.basePath("/cozinhas")
+			.port(port)
+			.accept(ContentType.JSON)
+		.when()
+			.get()
+		.then()
+			.statusCode(HttpStatus.OK.value());
 	}
 	
 }

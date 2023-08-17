@@ -15,6 +15,7 @@ import org.springframework.test.context.TestPropertySource;
 import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.repository.CozinhaRepository;
 import com.diniz.food.util.DatabaseCleaner;
+import com.diniz.food.util.ResourceUtils;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -36,12 +37,16 @@ class CadastroCozinhaIT {
 	
 	private Cozinha cozinhaAmericana;
 	private int quantidadeCozinhasCadastradas;
+	private String jsonCorretoCozinhaChinesa;
 	
 	@BeforeEach
 	public void setUp() {
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 		RestAssured.port = port;
 		RestAssured.basePath = "/cozinhas";
+		
+		jsonCorretoCozinhaChinesa = ResourceUtils.getContentFromResource(
+				"/json/correto/cozinha-chinesa.json");
 		
 		databaseCleaner.clearTables();
 		prepararDados();
@@ -70,7 +75,7 @@ class CadastroCozinhaIT {
 	@Test
 	public void deveRetornarStatus201_QuandoCadastrarCozinha() {
 		given()
-			.body("{ \"nome\": \"Chinesa\" }")
+			.body(jsonCorretoCozinhaChinesa)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
 		.when()

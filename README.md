@@ -1,13 +1,13 @@
-# EMPRESA DE DELIVERY DE COMIDA ( EM DESENVOLVIMENTO ) API REST
+# EMPRESA DE DELIVERY DE COMIDA API REST
 
  - REST API de uma empresa de Delivery de Comida (em desenvolvimento).
 
  - Nessa REST API você verá Boas Práticas usadas no mercado de trabalho usadas para desenvolvimento de uma REST API, como uso 
   correto dos código de status HTTP, uso dos verbos de forma correta, CRUD, Retornar respostas personalizadas, testes de integração etc...
 
- - Tecnologias e conceitos usados: Java, Spring, OO, MySQL, Flyway, Lombok, Maven, JPA, Spring Web, Padrão de Camadas, MVC, Hibernate, Tratamento de exceções da API.
+ - Tecnologias e conceitos usados: Java, Spring, OO, MySQL, Flyway, Lombok, Maven, JPA, Spring Web, Padrão de Camadas, MVC, Hibernate, Tratamento de exceções da API, Bean Validation, JUnit, AssertJ, RestAssured, Teste de API, Testes de Integração.
 
- - Tecnologias e conceitos que ainda serão utilizados: Bean Validation, JUnit, DTO, ModelMapper.
+ - Tecnologias e conceitos que ainda serão utilizados: DTO, ModelMapper.
 
   ![Screenshot (37)](https://github.com/iamdiniz/dinizfood-api/assets/72664530/281d289f-64a6-430a-92b1-b9441c94bbb9)
 

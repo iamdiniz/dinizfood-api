@@ -1,5 +1,7 @@
 package com.diniz.food;
 
+import java.util.TimeZone;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -11,6 +13,8 @@ import com.diniz.food.infrastructure.repository.CustomJpaRepositoryImpl;
 public class DinizfoodApiApplication {
 
 	public static void main(String[] args) {
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+		
 		SpringApplication.run(DinizfoodApiApplication.class, args);
 	}
 

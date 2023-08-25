@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diniz.food.api.assembler.RestauranteInputDisassembler;
 import com.diniz.food.api.assembler.RestauranteModelAssembler;
 import com.diniz.food.api.model.RestauranteModel;
 import com.diniz.food.api.model.input.RestauranteInput;
 import com.diniz.food.domain.exception.CozinhaNaoEncontradaException;
 import com.diniz.food.domain.exception.NegocioException;
-import com.diniz.food.domain.model.Cozinha;
 import com.diniz.food.domain.model.Restaurante;
 import com.diniz.food.domain.repository.RestauranteRepository;
 import com.diniz.food.domain.service.CadastroRestauranteService;
@@ -39,6 +39,9 @@ public class RestauranteController {
 	@Autowired
 	private RestauranteModelAssembler restauranteModelAssembler;
 	
+	@Autowired
+	private RestauranteInputDisassembler restauranteInputDisassembler;
+	
 	@GetMapping
 	public List<RestauranteModel> listar() {
 		return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
@@ -55,7 +58,7 @@ public class RestauranteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public RestauranteModel adicionar(@RequestBody @Valid RestauranteInput restauranteInput) {
 		try {
-			Restaurante restaurante = toDomainObject(restauranteInput);
+			Restaurante restaurante = restauranteInputDisassembler.toDomainObject(restauranteInput);
 			
 			return restauranteModelAssembler.toModel(restaurante = cadastroRestaurante.salvar(restaurante));
 		} catch (CozinhaNaoEncontradaException  e) {
@@ -67,7 +70,7 @@ public class RestauranteController {
 	public RestauranteModel atualizar(@PathVariable Long restauranteId,
 			@RequestBody RestauranteInput restauranteInput) {
 		try {
-			Restaurante restaurante = toDomainObject(restauranteInput);
+			Restaurante restaurante = restauranteInputDisassembler.toDomainObject(restauranteInput);
 			
 			Restaurante restauranteAtual = cadastroRestaurante.buscarOuFalhar(restauranteId);
 			
@@ -82,18 +85,5 @@ public class RestauranteController {
 	}
 	
 	// Removi o método patch porque nessa altura do campeonato não estava sendo necessário!, muito esforço
-	
-	private Restaurante toDomainObject(RestauranteInput restauranteInput) {
-		Restaurante restaurante = new Restaurante();
-		restaurante.setNome(restauranteInput.getNome());
-		restaurante.setTaxaFrete(restauranteInput.getTaxaFrete());
-		
-		Cozinha cozinha = new Cozinha();
-		cozinha.setId(restauranteInput.getCozinha().getId());
-		
-		restaurante.setCozinha(cozinha);
-		
-		return restaurante;
-	}
 	
 }

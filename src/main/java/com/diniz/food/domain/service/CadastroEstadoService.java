@@ -30,6 +30,7 @@ public class CadastroEstadoService {
 		try {
 			Estado estado = buscarOuFalhar(estadoId);
 			estadoRepository.deleteById(estado.getId());
+			estadoRepository.flush();
 		  
 		} catch (EmptyResultDataAccessException e) {
 			throw new EstadoNaoEncontradoException(estadoId);

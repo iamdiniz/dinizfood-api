@@ -40,6 +40,7 @@ public class CadastroCidadeService {
 		try {
 			Cidade cidade = buscarOuFalhar(cidadeId);
 			cidadeRepository.deleteById(cidade.getId());
+			cidadeRepository.flush();
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new CidadeNaoEncontradaException(cidadeId);

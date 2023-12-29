@@ -46,3 +46,13 @@
  - Se você tentar mudar algo que está em uso, irá retornar um 409 Conflict.
 
  - Todas as regras de exceções se aplicam a qualquer entidade!
+
+   # COMO BAIXAR?
+
+   - Para baixar você precisa do Spring instalado, o MySQL e o Postman para testar.
+  
+   - Com o Spring instalado, clone o projeto na sua máquina usando o git.
+  
+   - Depois importe o projeto no Spring em New > Import > Maven > Existing Maven Project, selecione a pasta onde você clonou o projeto.
+  
+   - Depois, dê um project clean, caso ainda fique dando erro, dê um update maven project. Caso não consiga, entre em contato.
